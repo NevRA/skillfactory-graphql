@@ -48,13 +48,14 @@ export type User = {
 export type UsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type UsersQuery = { __typename?: 'Query', users?: Array<{ __typename?: 'User', id: string, name: string } | null> | null };
+export type UsersQuery = { __typename?: 'Query', users?: Array<{ __typename?: 'User', id: string, age: number, name: string } | null> | null };
 
 
 export const UsersDocument = gql`
     query Users {
   users {
     id
+    age
     name
   }
 }
