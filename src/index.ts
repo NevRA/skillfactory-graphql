@@ -16,7 +16,7 @@ const typeDefs = `#graphql
 
   type Query {
     user(id: ID!): User
-    users(name: String!): [User]
+    users: [User]
   }
 
   type Mutation {
@@ -45,7 +45,7 @@ const users = [
 const resolvers = {
   Query: {
     user: (_, args) => users.find((user) => user.id === args.id),
-    users: (_, args) => users.filter((user) => user.name === args.name),
+    users: (_, args) => users,
   },
   Mutation: {
     updateUser: (_, args) => {
