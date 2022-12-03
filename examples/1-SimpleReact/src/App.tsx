@@ -7,7 +7,7 @@ const App = () => {
     <div className="App">
       {data &&
         data.users?.map((user) => (
-          <div className="card">
+          <div className="card" key={user?.id}>
             <div className="user-id">{user?.id}</div>
             <div className="user-name">{user?.name} {`${user?.age} y/o`}</div>
           </div>
