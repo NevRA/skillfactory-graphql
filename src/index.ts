@@ -1,5 +1,5 @@
-import { ApolloServer } from '@apollo/server';
-import { startStandaloneServer } from '@apollo/server/standalone';
+import { ApolloServer } from "@apollo/server";
+import { startStandaloneServer } from "@apollo/server/standalone";
 
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
@@ -18,30 +18,47 @@ const typeDefs = `#graphql
     user(id: ID!): User
     users(name: String!): [User]
   }
+
+  type Mutation {
+    updateUser(id: ID!, name: String, age: Int): User
+  }
 `;
 
 const users = [
   {
-    id: '42',
-    name: 'John',
+    id: "42",
+    name: "John",
     age: 38,
   },
   {
-    id: '43',
-    name: 'John',
+    id: "43",
+    name: "John",
     age: 25,
   },
   {
-    id: '44',
-    name: 'Alex',
+    id: "44",
+    name: "Alex",
     age: 18,
   },
 ];
 
 const resolvers = {
   Query: {
-    user: (_, args) => users.find(user => user.id === args.id),
-    users: (_, args) => users.filter(user => user.name === args.name),
+    user: (_, args) => users.find((user) => user.id === args.id),
+    users: (_, args) => users.filter((user) => user.name === args.name),
+  },
+  Mutation: {
+    updateUser: (_, args) => {
+      const user = users.find((user) => user.id === args.id);
+      if (!user) return null;
+      if(args.name) {
+        user.name = args.name
+      }
+      if(args.age) {
+        user.age = args.age
+      }
+      return user
+    },
   },
 };
 
