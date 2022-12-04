@@ -3,11 +3,11 @@ import { useState } from "react";
 import { useUsersQuery, useUpdateUserMutation } from "./generated/graphql.d";
 
 const App = () => {
-  const { data } = useUsersQuery();
-  const [updateUser] = useUpdateUserMutation();
   const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [age, setAge] = useState(0);
+  const { data } = useUsersQuery();
+  const [updateUser] = useUpdateUserMutation();
 
   const handleUpdate = () => {
     updateUser({
