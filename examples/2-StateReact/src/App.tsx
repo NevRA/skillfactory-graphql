@@ -1,20 +1,20 @@
 import "./App.css";
-import { useRef } from "react";
+import { useState } from "react";
 import { useUsersQuery, useUpdateUserMutation } from "./generated/graphql.d";
 
 const App = () => {
   const { data } = useUsersQuery();
   const [updateUser] = useUpdateUserMutation();
-  const idRef = useRef<HTMLInputElement>(null);
-  const nameRef = useRef<HTMLInputElement>(null);
-  const ageRef = useRef<HTMLInputElement>(null);
+  const [id, setId] = useState("");
+  const [name, setName] = useState("");
+  const [age, setAge] = useState(0);
 
   const handleUpdate = () => {
     updateUser({
       variables: {
-        id: String(idRef.current?.value),
-        name: String(nameRef.current?.value),
-        age: Number(ageRef.current?.value),
+        id,
+        name,
+        age,
       },
     });
   };
@@ -33,9 +33,9 @@ const App = () => {
           ))}
       </div>
       <div className="card-edit">
-        <input ref={idRef} />
-        <input ref={nameRef} />
-        <input ref={ageRef} />
+        <input onChange={(e) => setId(e.target.value)} />
+        <input onChange={(e) => setName(e.target.value)} />
+        <input onChange={(e) => setAge(Number(e.target.value))} />
         <button onClick={handleUpdate}>update</button>
       </div>
     </div>
