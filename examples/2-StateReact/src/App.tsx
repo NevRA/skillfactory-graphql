@@ -35,7 +35,7 @@ const App = () => {
       <div className="card-edit">
         <input onChange={(e) => setId(e.target.value)} />
         <input onChange={(e) => setName(e.target.value)} />
-        <input onChange={(e) => setAge(Number(e.target.value))} />
+        <input type="number" onChange={(e) => setAge(Number(e.target.value))} />
         <button onClick={handleUpdate}>update</button>
       </div>
     </div>
